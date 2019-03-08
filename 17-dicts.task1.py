@@ -1,26 +1,13 @@
+import requests
+import random
 
-cost = {
-    "banana": 4,
-    "apple": 2,
-    "orange": 1.5,
-    "pear": 3
-}
+ir = random.randint(1, 999999)
 
+url = 'http://api.forismatic.com/api/1.0/'
+payload = {'method': 'getQuote', 'format': 'json', 'key': ir, 'lang': 'ru'}
+res = requests.get(url, params=payload)
 
-basket = {
-    'banana': 2,
-    'orange' : 2,
-    'apple' : 1,
-    'pear' : 2
-}
+data = res.json()
 
-
-def command_bill (cost, basket):
-    res = {}
-    for key in basket.keys():
-        res[key] = basket[key] * cost[key]
-    return res
-
-
-summ=command_bill (cost, basket)
-print(summ)
+print(data)
+print(payload)

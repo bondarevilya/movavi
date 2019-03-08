@@ -1,14 +1,24 @@
-x = 1
-d = {}
-out_file = open('data.txt', 'r')
+cost = {
+    "banana": 4,
+    "apple": 2,
+    "orange": 1.5,
+    "pear": 3
+}
 
-for line in out_file:
-    lst = line.split()
-    for word in lst:
-        print(word)
-        if d.get(word) is None:
-            d[word]=1
-        else:
-            d[word]+=1
-print(d)
+basket = {
+    'banana': 2,
+    'orange': 2,
+    'apple': 1,
+    'pear': 2
+}
 
+
+def command_bill(cost, basket):
+    res = {}
+    for key in basket.keys():
+        res[key] = basket[key] * cost[key]
+    return res
+
+
+summ = command_bill(cost, basket)
+print(summ)
