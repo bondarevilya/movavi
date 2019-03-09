@@ -1,13 +1,20 @@
 import requests
 import random
+import easygui
 
-ir = random.randint(1, 999999)
+langs = [
+    'ru',
+    'en',
+    'ВЫЙТИ'
+]
 
-url = 'http://api.forismatic.com/api/1.0/'
-payload = {'method': 'getQuote', 'format': 'json', 'key': ir, 'lang': 'ru'}
-res = requests.get(url, params=payload)
-
-data = res.json()
-
-print(data)
-print(payload)
+while True:
+    l = easygui.buttonbox(msg='Выбери язык', title='Выбор языка ', choices=(langs))
+    if l == 'ВЫЙТИ':
+        break
+    ir = random.randint(1, 999999)
+    url = 'http://api.forismatic.com/api/1.0/'
+    payload = {'method': 'getQuote', 'format': 'json', 'key': ir, 'lang': l}
+    res = requests.get(url, params=payload)
+    data = res.json()
+    easygui.msgbox(data['quoteText'])
